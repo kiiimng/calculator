@@ -1,0 +1,164 @@
+:root {
+	--border-color: #544d4a;
+	--button-color: #353535;
+	--num-bg-dark: #776764;
+}
+
+.wrapper {
+	display: grid; 
+	grid-gap: 6px;
+	grid-template-columns: repeat(4, 70px); 
+	grid-template-rows:  repeat(5, 60px);
+	grid-template-areas: 
+
+		"clear clear div mult"
+		"seven eight nine subt"
+		"four five six add"
+		"one two three eq"
+		"zero zero decimal eq";
+}
+
+
+#record {
+	height: 30px;
+}
+body {
+	display: flex;
+	justify-content:  center;
+	align-items: center;
+	font-family: 'Muli', sans-serif;
+}
+
+.container {
+	display: flex;
+	border: 6px solid var(--border-color);	
+	border-radius: 5px;
+	padding: 30px;
+	background-color: #c5ddd8;
+}
+
+.display {
+	grid-area: d;
+	background-color: #97a3a0;
+	color: white;
+	font-size: 1.8em;
+	border: 6px solid var(--border-color);
+	border-radius: 5px;
+	padding: 0;
+	margin-bottom: 15px;
+	display: flex;
+}
+
+p {
+	margin: 0;
+	padding: 0;
+}
+
+#record {
+	font-size: .9em;
+	color: #fcd76a;
+}
+
+#current-text {
+	height: 1.3em;
+}
+
+.display-inner {
+	display: flex;
+	border: 4px solid var(--border-color);	
+	border-radius: 5px;
+	background-color: var(--num-bg-dark);
+	padding-right: 5px;
+	margin: 5px;
+	width: 100%;
+	flex-direction: column;
+	align-items: flex-end;
+
+}
+
+button {
+	border: 5px solid var(--border-color);
+	border-radius: 5px;
+	font-size: 2.5em;
+	padding: 0;
+	color: var(--button-color);
+	font-family: 'Muli', sans-serif;
+}
+
+.num, .decimal{
+	color: white;
+	background-color: var(--num-bg-dark);
+
+}
+
+
+
+
+.zero {
+	grid-area: zero ;
+}
+
+.one {
+ 	grid-area: one;
+}
+
+.two {
+	grid-area: two;
+}
+
+.three {
+ grid-area: three;
+}
+
+.four {
+	grid-area: four;
+}
+
+.five {
+	grid-area: five;
+}
+
+.six {
+	grid-area: six;
+}
+
+.seven {
+	grid-area: seven;
+}
+
+.eight {
+	grid-area: eight;
+}
+
+.nine {
+	grid-area: nine;
+}
+
+.decimal {
+	grid-area: decimal;
+}
+
+.equals {
+	grid-area: eq;
+}
+
+.add {
+	grid-area: add;
+}
+
+.subtract {
+	grid-area: subt;
+}
+
+.multiply {
+	grid-area: mult;
+}
+
+.divide {
+	grid-area: div
+}
+.clear {
+	grid-area: clear;
+	background-color: #e0522a;
+	color: white;
+}
