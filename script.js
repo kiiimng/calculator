@@ -18,7 +18,7 @@ function buttonClicked(e){
 		} 
 		
 		if (e.target.classList.contains("num")) {
-			if (isNaN(currentTextDisplay.textContent)) {
+			if (currentTextDisplay.textContent != "." && isNaN(currentTextDisplay.textContent)) {
 				pushDisplay(e);
 			}
 			
@@ -27,20 +27,19 @@ function buttonClicked(e){
 		}
 
 		if (e.target.classList.contains("math")) {
-			pushDisplay(e)
-			//updateDisplay(e)
+					
 			mathClicked(e);
 
-		}
+		
+	}
 
 		if (e.target.classList.contains("decimal")) {
-			let string = currentTextDisplay.textContent
-			if (string.indexOf(".") == -1) {
+			
 				
 				decimalClicked(e);
 			}
 			
-		}
+		
 		
 		
 }
@@ -59,6 +58,7 @@ function clearAll(){
 function calculate(){
 	answer = eval(currentTextDisplay.textContent) ;
 	currentTextDisplay.textContent = answer;
+
 	
 }
 
@@ -72,12 +72,17 @@ function numberClicked(e) {
 }
 
 function mathClicked(e){
-	//if (currentTextDisplay.textContent != 0) {
-		
-		updateDisplay(e);
-		
+	if (currentTextDisplay.textContent != "0" &&
+		currentTextDisplay.textContent != "/" &&
+		currentTextDisplay.textContent != "*" &&
+		currentTextDisplay.textContent != "+" &&
+		currentTextDisplay.textContent != "-" 
+		) {
+			pushDisplay(e)
+			updateDisplay(e);
+		}
 	}
-	//}
+	
 	
 function updateDisplay(e){
 	if (currentTextDisplay.textContent.substr(-1) != e.target.textContent)
@@ -86,13 +91,25 @@ function updateDisplay(e){
 }
 
 function decimalClicked(e) {
+	//push display only if 
+
+
+	if (
+		currentTextDisplay.textContent == "/" ||
+		currentTextDisplay.textContent == "*" ||
+		currentTextDisplay.textContent == "+" ||
+		currentTextDisplay.textContent == "-" 
+		) {
+	pushDisplay(e)
+}
 	if (currentTextDisplay.textContent != 0 || 
 		currentTextDisplay.textContent != ".") {
-
+let string = currentTextDisplay.textContent
+			if (string.indexOf(".") == -1) {
 		
 		updateDisplay(e);
 	
-		
+		}
 	}
 
 }
