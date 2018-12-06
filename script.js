@@ -12,8 +12,15 @@ function buttonClicked(e){
 		} 
 
 		if (e.target.id === "equals") {
-			pushDisplay(e)
+			if (array.length <= 1) {
+				return;
+			} else {
+				pushDisplay(e);
+			updateRecord();
 			calculate();
+			}
+			
+			
 
 		} 
 		
@@ -23,13 +30,26 @@ function buttonClicked(e){
 			}
 			
 			numberClicked(e);
+			updateRecord()
+
 
 		}
 
 		if (e.target.classList.contains("math")) {
-					
-			mathClicked(e);
+			//if array length is less than or equal to 1 AND answer != null
+			// then 	use array content as display record then math operator
 
+			if (array.length <= 1 && answer) {
+				console.log("answer" +answer)
+				updateRecord();
+				currentTextDisplay.textContent = e.target.textContent;
+			}
+			else {
+				mathClicked(e);
+				updateRecord();
+
+			}
+			
 		
 	}
 
@@ -52,22 +72,43 @@ let clearButton = document.getElementById("clear");
 function clearAll(){
 	currentTextDisplay.textContent = "0";
 	array = [];
-
+	recordDisplay.textContent ="";
+	answer = null;
 }
 
 function calculate(){
-	answer = eval(currentTextDisplay.textContent) ;
-	currentTextDisplay.textContent = answer;
+	//updateRecord();
+	
+	if (array[1] == "+") {
+		currentTextDisplay.textContent  = (sNumber(array[0]) + Number(array[2]));
+	}
 
+	if (array[1] == "-") {
+		currentTextDisplay.textContent  = (Number(array[0]) - Number(array[2]));
+	}
+	if (array[1] == "*") {
+		currentTextDisplay.textContent  = (Number(array[0]) * Number(array[2]));
+	}
+	if (array[1] == "/") {
+		currentTextDisplay.textContent  = (Number(array[0]) / Number(array[2]));
+	}
+
+// array = [];
+answer = currentTextDisplay.textContent;
+array = array.slice(3);
+array.unshift(answer);
+if(  array.length > 2 ) {
+	calculate();
+};
+console.log(answer);
+console.log("newArray" + array);
 	
 }
 
 function numberClicked(e) {
-	console.log("number key")
-	
+		
 	currentTextDisplay.textContent == "0" ?
 	currentTextDisplay.textContent = e.target.textContent : currentTextDisplay.textContent += e.target.textContent;
-
 
 }
 
@@ -81,13 +122,20 @@ function mathClicked(e){
 			pushDisplay(e)
 			updateDisplay(e);
 		}
+		else {
+			currentTextDisplay.textContent = e.target.textContent
+		}
 	}
 	
 	
 function updateDisplay(e){
 	if (currentTextDisplay.textContent.substr(-1) != e.target.textContent)
-	currentTextDisplay.textContent += e.target.textContent 
+	currentTextDisplay.textContent += e.target.textContent ;
 
+}
+
+function updateRecord(){
+		recordDisplay.textContent = array.join("")
 }
 
 function decimalClicked(e) {
